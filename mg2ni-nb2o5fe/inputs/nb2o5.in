@@ -1,0 +1,67 @@
+&CONTROL
+   calculation      = 'vc-relax'
+   restart_mode     = 'from_scratch'
+   tstress          = .true.
+   tprnfor          = .true.
+   outdir           = './outdir/'
+   prefix           = 'nb2o5'
+   etot_conv_thr    = 0.00014
+   forc_conv_thr    = 0.0001
+   pseudo_dir       = '../pseudo/'
+/
+&SYSTEM
+   ecutwfc          = 60.0
+   ecutrho          = 480.0
+   occupations      = 'smearing'
+   degauss          = 0.01
+   smearing         = 'cold'
+   nspin            = 1
+   ntyp             = 2
+   nat              = 14
+   ibrav            = 0
+   vdw_corr         = 'dft-d3'
+/
+&ELECTRONS
+   electron_maxstep = 120
+   conv_thr         = 1.2e-09
+   mixing_beta      = 0.4
+/
+&IONS
+   ion_dynamics     = 'bfgs'
+/
+&CELL
+   cell_dynamics    = 'bfgs'
+   press_conv_thr   = 0.5
+/
+&FCP
+/
+&RISM
+/
+ATOMIC_SPECIES
+Nb 92.90637 Nb.pbe-spn-kjpaw_psl.0.3.0.UPF
+O 15.999 O.pbe-n-kjpaw_psl.0.1.UPF
+
+K_POINTS automatic
+4 4 4  0 0 0
+
+CELL_PARAMETERS angstrom
+6.36000000000000 0.00000000000000 0.00000000000000
+0.00000000000000 4.88000000000000 0.00000000000000
+0.00000000000000 0.00000000000000 6.20000000000000
+
+ATOMIC_POSITIONS angstrom
+Nb 1.2720000000 1.2200000000 0.3100000000  
+Nb 4.4520000000 3.6600000000 0.3100000000  
+Nb 1.9080000000 1.2200000000 3.4100000000  
+Nb 5.0880000000 3.6600000000 3.4100000000  
+O 0.0000000000 1.2200000000 1.5500000000  
+O 3.1800000000 3.6600000000 1.5500000000  
+O 3.1800000000 1.2200000000 1.5500000000  
+O 0.0000000000 3.6600000000 1.5500000000  
+O 1.2720000000 3.6600000000 0.3100000000  
+O 4.4520000000 1.2200000000 0.3100000000  
+O 1.9080000000 3.6600000000 3.4100000000  
+O 5.0880000000 1.2200000000 3.4100000000  
+O 1.2720000000 1.2200000000 5.2700000000  
+O 4.4520000000 3.6600000000 5.2700000000  
+

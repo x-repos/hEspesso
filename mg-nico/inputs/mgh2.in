@@ -1,0 +1,63 @@
+&CONTROL
+    calculation      = 'vc-relax'
+    prefix           = 'mgh2'
+    pseudo_dir       = '/home/x/Workspace/espresso/pseudo'
+    outdir           = './outdir/'
+    restart_mode     = 'from_scratch'
+    tprnfor          = .true.
+    tstress          = .true.
+    etot_conv_thr    = 1.0d-5
+    forc_conv_thr    = 1.0d-4
+    nstep            = 80
+    max_seconds      = 21600
+/
+
+&SYSTEM
+    ibrav            = 0
+    nat              = 6
+    ntyp             = 2
+    ecutwfc          = 60.0
+    ecutrho          = 480.0
+    occupations      = 'smearing'
+    smearing         = 'cold'
+    degauss          = 0.01
+    
+    vdw_corr         = 'DFT-D3'
+    dftd3_version    = 4
+/
+
+&ELECTRONS
+    electron_maxstep = 100
+    conv_thr         = 1.0d-9
+    mixing_beta      = 0.4
+    diagonalization  = 'david'
+/
+
+&IONS
+    ion_dynamics = 'bfgs'
+/
+
+&CELL
+    cell_dynamics = 'bfgs'
+    press_conv_thr = 0.5
+/
+
+ATOMIC_SPECIES
+  Mg  24.305    Mg.pbe-n-kjpaw_psl.0.3.0.UPF
+  H    1.00794  H.pbe-rrkjus_psl.1.0.0.UPF
+
+CELL_PARAMETERS angstrom
+      4.5168000000      0.0000000000      0.0000000000
+      0.0000000000      4.5168000000      0.0000000000
+      0.0000000000      0.0000000000      3.0205000000
+
+ATOMIC_POSITIONS angstrom
+  Mg      0.0000000000      0.0000000000      0.0000000000
+  Mg      2.2584000000      2.2584000000      1.5102500000
+  H       1.3731072000      1.3731072000      0.0000000000
+  H      -1.3731072000     -1.3731072000      0.0000000000
+  H       3.6315072000      0.8852928000      1.5102500000
+  H       0.8852928000      3.6315072000      1.5102500000
+
+K_POINTS automatic
+  8 8 12 0 0 0

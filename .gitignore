@@ -1,0 +1,40 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.egg-info/
+.venv/
+venv/
+env/
+.ipynb_checkpoints/
+
+# Quantum ESPRESSO run artifacts
+outdir/
+*/outdir/
+*.save/
+*.wfc*
+*.hub
+*.mix*
+*.igk*
+*.update
+*.bfgs
+*.restart_k*
+*.occup
+*.paw
+CRASH
+*/CRASH
+
+# Logs and run outputs
+logs/
+*/logs/
+*.log
+*.out.tmp
+slurm-*.out
+
+# Editor / OS
+.vscode/
+.idea/
+*.swp
+*.swo
+.DS_Store
+Thumbs.db

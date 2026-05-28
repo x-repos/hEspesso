@@ -1,0 +1,75 @@
+&CONTROL
+    calculation      = 'vc-relax'
+    prefix           = 'mgni'
+    pseudo_dir       = '/home/x/Workspace/espresso/pseudo'
+    outdir           = './outdir/'
+    restart_mode     = 'from_scratch'
+    tprnfor          = .true.
+    tstress          = .true.
+    etot_conv_thr    = 1.0d-5
+    forc_conv_thr    = 1.0d-4
+    nstep            = 80
+    max_seconds      = 21600
+/
+
+&SYSTEM
+    ibrav            = 0
+    nat              = 16
+    ntyp             = 2
+    ecutwfc          = 60.0
+    ecutrho          = 480.0
+    occupations      = 'smearing'
+    smearing         = 'cold'
+    degauss          = 0.01
+    nspin            = 2
+    starting_magnetization(1) = 0.5
+    starting_magnetization(2) = 0.0
+    vdw_corr         = 'DFT-D3'
+    dftd3_version    = 4
+/
+
+&ELECTRONS
+    electron_maxstep = 100
+    conv_thr         = 1.0d-9
+    mixing_beta      = 0.3
+    diagonalization  = 'david'
+/
+
+&IONS
+    ion_dynamics = 'bfgs'
+/
+
+&CELL
+    cell_dynamics = 'bfgs'
+    press_conv_thr = 0.5
+/
+
+ATOMIC_SPECIES
+  Ni  58.6934   ni_pbe_v1.4.uspp.F.UPF
+  Mg  24.305    Mg.pbe-n-kjpaw_psl.0.3.0.UPF
+
+CELL_PARAMETERS angstrom
+      6.4000000000      0.0000000000      0.0000000000
+     -3.2000000000      5.5425625842      0.0000000000
+      0.0000000000      0.0000000000     10.4200000000
+
+ATOMIC_POSITIONS angstrom
+  Ni      0.0000000000      1.8475208614      1.3025000000
+  Mg      1.6000000000      0.9237604307      3.9075000000
+  Mg      0.0000000000      1.8475208614      6.5125000000
+  Mg      1.6000000000      0.9237604307      9.1175000000
+  Mg     -1.6000000000      4.6188021535      1.3025000000
+  Mg      0.0000000000      3.6950417228      3.9075000000
+  Mg     -1.6000000000      4.6188021535      6.5125000000
+  Mg      0.0000000000      3.6950417228      9.1175000000
+  Mg      3.2000000000      1.8475208614      1.3025000000
+  Mg      4.8000000000      0.9237604307      3.9075000000
+  Mg      3.2000000000      1.8475208614      6.5125000000
+  Ni      4.8000000000      0.9237604307      9.1175000000
+  Mg      1.6000000000      4.6188021535      1.3025000000
+  Mg      3.2000000000      3.6950417228      3.9075000000
+  Mg      1.6000000000      4.6188021535      6.5125000000
+  Mg      3.2000000000      3.6950417228      9.1175000000
+
+K_POINTS automatic
+  6 6 4 0 0 0
