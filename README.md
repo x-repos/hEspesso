@@ -1,7 +1,7 @@
-# hEspesso — DFT studies of Mg-based hydrogen-storage catalysts
+# hEspesso: DFT studies of Mg-based hydrogen-storage catalysts
 
 Quantum ESPRESSO (PBE + DFT-D3) workflows that test whether transition-metal
-and oxide additives **destabilise** Mg-based hydrides — i.e. raise ΔH per H₂
+and oxide additives **destabilise** Mg-based hydrides, i.e. raise ΔH per H₂
 toward zero so that H₂ release becomes easier under practical conditions.
 
 More material systems will be added over time.
@@ -20,4 +20,4 @@ More material systems will be added over time.
 | [`mg2ni-nb2o5fe/`](mg2ni-nb2o5fe/README.md) | Do Nb (from Nb₂O₅) and Fe additives destabilise Mg₂NiH₄? Pristine vs. Nb-doped vs. Nb,Fe co-doped. |
 | [`pseudo/`](pseudo/) | Shared UPF pseudopotential library used by all studies. |
 
-Each sub-study is self-contained — see its README for reactions, settings, and reproduction steps.
+Each sub-study is self-contained. See its README for reactions, settings, and reproduction steps.
