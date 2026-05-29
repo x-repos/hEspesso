@@ -83,10 +83,48 @@ def render_legend():
     print(f"  wrote {out.relative_to(HERE)}")
 
 
+def render_combined(out_name="mgnico_nolegend.png",
+                    panels=("mgh2", "mgh2ni", "mgh2co"),
+                    width_ratios=(0.55, 1.0, 1.0)):
+    """Render several structures side by side in one figure, with titles
+    but NO legend. width_ratios shrinks individual panels (the small
+    rutile MgH2 cell gets a narrower panel by default)."""
+    from ase.visualize.plot import plot_atoms
+    titlemap = {n: t for n, t, _ in JOBS}
+    rotmap   = {n: r for n, _, r in JOBS}
+    if width_ratios is None or len(width_ratios) != len(panels):
+        width_ratios = [1.0] * len(panels)
+    fig, axes = plt.subplots(1, len(panels), figsize=(4 * sum(width_ratios), 4),
+                             dpi=200, gridspec_kw={"width_ratios": list(width_ratios)})
+    if len(panels) == 1:
+        axes = [axes]
+    for ax, name in zip(axes, panels):
+        src = OUTPUTS / f"{name}.out"
+        if not src.exists():
+            print(f"  skip {name}: {src} missing")
+            ax.set_axis_off()
+            continue
+        atoms = read(src, format="espresso-out", index=-1)
+        colors = [COLORS.get(sp, "#aaaaaa") for sp in atoms.get_chemical_symbols()]
+        radii  = [0.55 if sp == "H" else 0.95 for sp in atoms.get_chemical_symbols()]
+        plot_atoms(atoms, ax, rotation=rotmap[name], radii=radii,
+                   colors=colors, show_unit_cell=2)
+        ax.set_axis_off()
+        # Pin the (aspect-shrunk) axes box to the top of its cell so every
+        # panel's title sits on the same line.
+        ax.set_anchor("N")
+        ax.set_title(titlemap[name], fontsize=14, pad=20)
+    out = FIGDIR / out_name
+    fig.savefig(out, bbox_inches="tight", pad_inches=0.05)
+    plt.close(fig)
+    print(f"  wrote {out.relative_to(HERE)}")
+
+
 def main():
     for name, title, rot in JOBS:
         render(name, title, rot)
     render_legend()
+    render_combined()
 
 
 if __name__ == "__main__":
