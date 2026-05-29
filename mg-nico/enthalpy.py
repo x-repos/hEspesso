@@ -121,8 +121,8 @@ def main():
     # --- Reference values --------------------------------------------------
     print()
     print("Reference (experimental, for sanity):")
-    print("  MgH2  desorption     ΔH ≈ -75   kJ/mol H2  (Bogdanovic 1999)")
-    print("  Mg2NiH4 desorption   ΔH ≈ -64.5 kJ/mol H2  (Reilly-Wiswall 1968)")
+    print("  MgH2     formation   ΔH ≈ -75   kJ/mol H2  (Bogdanovic 1999)")
+    print("  Mg2NiH4  formation   ΔH ≈ -64.4 kJ/mol H2  (Reilly-Wiswall 1968)")
 
 
 if __name__ == "__main__":

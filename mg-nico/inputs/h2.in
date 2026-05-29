@@ -8,7 +8,7 @@
     tstress          = .true.
     etot_conv_thr    = 1.0d-5
     forc_conv_thr    = 1.0d-4
-    nstep            = 80
+    nstep            = 200
     max_seconds      = 21600
 /
 
@@ -21,6 +21,7 @@
     occupations      = 'fixed'
     
     
+    
     vdw_corr         = 'DFT-D3'
     dftd3_version    = 4
 /
@@ -29,7 +30,10 @@
     electron_maxstep = 100
     conv_thr         = 1.0d-9
     mixing_beta      = 0.7
+    mixing_mode      = 'plain'
+    mixing_ndim      = 8
     diagonalization  = 'david'
+    diago_david_ndim = 4
 /
 
 &IONS

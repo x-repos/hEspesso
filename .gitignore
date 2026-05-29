@@ -31,6 +31,23 @@ logs/
 *.out.tmp
 slurm-*.out
 
+# LaTeX build artifacts (compile.sh cleans these; *.out is NOT listed
+# because Quantum ESPRESSO output files use that extension)
+*.aux
+*.bbl
+*.blg
+*.toc
+*.lof
+*.lot
+*.synctex.gz
+*.fls
+*.fdb_latexmk
+*.nav
+*.snm
+*.vrb
+*.bcf
+*.run.xml
+
 # Editor / OS
 .vscode/
 .idea/

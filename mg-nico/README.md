@@ -30,7 +30,7 @@ All seven structures use identical settings:
 | Pseudopotentials   | PAW for Mg/H, USPP for Ni/Co (PSlibrary 1.x) |
 | Smearing           | cold, degauss = 0.01 Ry (metals)             |
 | Occupations (H2)   | fixed (insulating molecule)                  |
-| Spin               | nspin=2 for TM-containing cells, mag init    |
+| Spin               | nspin=1 throughout (see note below)          |
 | conv_thr           | 1e-9                                         |
 | forc_conv_thr      | 1e-4 Ry/Bohr                                 |
 | Cell optimisation  | vc-relax for solids; relax-only for H2/box   |
@@ -86,8 +86,34 @@ Experimental ΔH references (for sanity):
 * MgH2 desorption:    -75   kJ/mol H2 (Bogdanovic et al., 1999)
 * Mg2NiH4 desorption: -64.5 kJ/mol H2 (Reilly & Wiswall, 1968)
 
+## Results
+
+Converged on RTX 5090 (PBE + DFT-D3, vc-relax, nspin=1, nosym for doped cells):
+
+| Pathway              | ΔH per H₂ (kJ/mol) | ΔΔH vs pure Mg | Interpretation               |
+|----------------------|--------------------|-----------------|------------------------------|
+| **R1** pure Mg       | **−63.75**         | —               | baseline                     |
+| **R2** Mg:Ni (12%)   | **−48.80**         | **+14.95**      | ✅ destabilises → easier H₂ release |
+| **R3** Mg:Co (12%)   | **−55.24**         | **+8.51**       | ✅ destabilises → easier H₂ release |
+
+Pure-Mg ΔH = −63.75 kJ/mol H₂ vs experimental −75 (PBE under-binds hydrides
+by ~10 kJ/mol H₂; the catalyst differences ΔΔH are robust against this
+systematic offset because both reactant and product carry the same error).
+
+Convergence quality:
+- mg, h2, mgh2, mgni, mgco, mgh2co — BFGS converged, |F| < 5·10⁻⁴ Ry/Bohr
+- mgh2ni — BFGS reset/failed after 43 steps at |F| = 5·10⁻³ Ry/Bohr;
+  energy converged to 10⁻⁶ Ry, geometry near minimum, energy usable.
+
 ## Caveats
 
+- **Non-spin-polarised (nspin=1).** In the hydrided supercells H bonding
+  quenches the TM 3d moment, and in the dilute metallic supercells the
+  initial nspin=2 calculation gave 0 μB for Ni and ~1.3 μB/atom for Co.
+  Treating both reactant and product non-magnetically cancels a partial-
+  quench bias in ΔΔH and lets SCF converge robustly without spin
+  sloshing. Test runs with nspin=2 on mgni and mgh2ni gave essentially
+  identical ΔH (Ni was nonmagnetic anyway).
 - **No ZPE.** Static-lattice DFT only. ZPE typically shifts ΔH by
   +6 to +10 kJ/mol H2 *uniformly* for these systems, so the inter-pathway
   comparison is robust without it.

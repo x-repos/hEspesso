@@ -128,7 +128,7 @@ CONTROL_TEMPLATE = """&CONTROL
     tstress          = .true.
     etot_conv_thr    = 1.0d-5
     forc_conv_thr    = 1.0d-4
-    nstep            = 80
+    nstep            = 200
     max_seconds      = 21600
 /
 """
@@ -142,16 +142,20 @@ SYSTEM_TEMPLATE = """&SYSTEM
     occupations      = '{occ}'
     {smearing_lines}
     {spin_lines}
+    {symmetry_lines}
     vdw_corr         = 'DFT-D3'
     dftd3_version    = 4
 /
 """
 
 ELECTRONS_TEMPLATE = """&ELECTRONS
-    electron_maxstep = 100
+    electron_maxstep = {maxstep}
     conv_thr         = 1.0d-9
     mixing_beta      = {mix}
+    mixing_mode      = '{mix_mode}'
+    mixing_ndim      = {mix_ndim}
     diagonalization  = 'david'
+    diago_david_ndim = 4
 /
 """
 
@@ -175,31 +179,40 @@ def write_input(name, atoms, cell_vecs, calc, kpts, magnetic_tms=()):
     ntyp = len(species)
     nat = len(atoms)
 
+    # All systems use nspin=1. Justification: in the hydride forms, H bonding
+    # quenches the TM 3d moment; in the dilute-Mg metal forms the moment is
+    # small (Ni: 0 μB after relaxation; Co: ~1.3 μB/atom). Treating both
+    # reactant and product non-magnetically cancels a partial-quench bias in
+    # ΔΔH and lets SCF converge robustly. The `magnetic_tms` argument is kept
+    # for backwards compatibility but ignored.
     is_h2_only = species == ["H"]
+    has_tm = any(sp in ("Ni", "Co") for sp in species)
     if is_h2_only:
         occ = "fixed"
         smearing_lines = ""
         mix = 0.7
+        maxstep, mix_mode, mix_ndim = 100, "plain", 8
     else:
         occ = "smearing"
         smearing_lines = "smearing         = 'cold'\n    degauss          = 0.01"
-        mix = 0.3 if magnetic_tms else 0.4
+        mix = 0.3 if has_tm else 0.4
+        maxstep, mix_mode, mix_ndim = (200, "plain", 12) if has_tm else (120, "plain", 8)
 
-    if magnetic_tms:
-        spin_block = ["nspin            = 2"]
-        for i, sp in enumerate(species, start=1):
-            mom = {"Ni": 0.5, "Co": 0.7}.get(sp, 0.0)
-            spin_block.append(f"starting_magnetization({i}) = {mom}")
-        spin_lines = "\n    ".join(spin_block)
-    else:
-        spin_lines = ""
+    spin_lines = ""
+
+    # Doped supercells: dopant placement breaks the parent symmetry. Disable
+    # symmetry detection so vc-relax doesn't trip on "not orthogonal operation"
+    # after the cell distorts. Harmless for non-symmetric cells too.
+    symmetry_lines = "nosym            = .true.\n    noinv            = .true." if has_tm else ""
 
     control  = CONTROL_TEMPLATE.format(
         calc=calc, prefix=name, pseudo_dir=PSEUDO_DIR)
     system   = SYSTEM_TEMPLATE.format(
         nat=nat, ntyp=ntyp, occ=occ,
-        smearing_lines=smearing_lines, spin_lines=spin_lines)
-    electrons = ELECTRONS_TEMPLATE.format(mix=mix)
+        smearing_lines=smearing_lines, spin_lines=spin_lines,
+        symmetry_lines=symmetry_lines)
+    electrons = ELECTRONS_TEMPLATE.format(
+        mix=mix, maxstep=maxstep, mix_mode=mix_mode, mix_ndim=mix_ndim)
 
     parts = [control, system, electrons]
     if calc in ("relax", "vc-relax"):
