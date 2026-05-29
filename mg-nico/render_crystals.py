@@ -21,13 +21,13 @@ FIGDIR.mkdir(exist_ok=True)
 
 # species -> (descriptive title, rotation for camera)
 JOBS = [
-    ("mg",     "Mg HCP",               "-72x,-12y,0z"),
-    ("h2",     "H2 molecule",           "0x,0y,0z"),
-    ("mgh2",   "rutile MgH2",           "-75x,-10y,0z"),
-    ("mgni",   "Mg14Ni2 (Ni 12.5%)",   "-72x,-12y,0z"),
-    ("mgco",   "Mg14Co2 (Co 12.5%)",   "-72x,-12y,0z"),
-    ("mgh2ni", "Mg14Ni2H32 (Ni 12.5%)", "-75x,-10y,0z"),
-    ("mgh2co", "Mg14Co2H32 (Co 12.5%)", "-75x,-10y,0z"),
+    ("mg",     "Mg HCP",                        "-72x,-12y,0z"),
+    ("h2",     "H$_2$ molecule",                "0x,0y,0z"),
+    ("mgh2",   "Rutile MgH$_2$",                "-75x,-10y,0z"),
+    ("mgni",   "Mg$_{14}$Ni$_2$ (Ni 12.5%)",    "-72x,-12y,0z"),
+    ("mgco",   "Mg$_{14}$Co$_2$ (Co 12.5%)",    "-72x,-12y,0z"),
+    ("mgh2ni", "Mg$_{14}$Ni$_2$H$_{32}$ (Ni 12.5%)", "-75x,-10y,0z"),
+    ("mgh2co", "Mg$_{14}$Co$_2$H$_{32}$ (Co 12.5%)", "-75x,-10y,0z"),
 ]
 
 # Element colours (CPK-ish, with Ni/Co distinct)
@@ -58,7 +58,7 @@ def render(name, title, rotation):
         show_unit_cell=2,
     )
     ax.set_axis_off()
-    ax.set_title(title, fontsize=10)
+    ax.set_title(title, fontsize=14, pad=30)
     out = FIGDIR / f"{name}.png"
     fig.savefig(out, bbox_inches="tight", pad_inches=0.05)
     plt.close(fig)
