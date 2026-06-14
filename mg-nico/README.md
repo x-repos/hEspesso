@@ -241,11 +241,11 @@ magnitude (sublinear with concentration).
   every Mg site is symmetry-equivalent, so 1-dopant placement is unique
   there. Mg2Ni and LT-Mg2NiH4 have inequivalent Mg sites (Mg1/Mg2/Mg3 in
   the hydride); this study uses the single (documented) substitution site
-  of the mg2ni-nb2o5fe study. Yoon et al. (2024), who averaged all three
-  hydride Mg sites, find a site-to-site spread of ~1.4 kJ/mol H2 for Co --
-  treat our single-site Mg2Ni shifts as carrying ~±0.7 kJ/mol H2 site
-  uncertainty. (Ni-site substitution is unique up to the two Ni Wyckoff
-  positions; we use the first.)
+  of the mg2ni-nb2o5fe study. Yoon et al. (2024) report Co at the three
+  inequivalent Mg sites of Mg2NiH4 at -54.58/-53.64/-55.02 kJ/mol H2 (Table
+  7), a ~1.4 kJ/mol H2 site-to-site spread -- the scale of the uncertainty
+  on our single-site Mg2Ni shifts. (Ni-site substitution is unique up to the
+  two Ni Wyckoff positions; we use the first.)
 - **Dilute-defect asymmetry (Mg2Ni host).** The dopant sits in an 18-atom
   metal cell (1/18 of metal sites) but a 28-atom hydride cell (1/12 of
   metal sites); the residual is a finite-size/finite-concentration error
