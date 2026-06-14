@@ -1,7 +1,7 @@
 &CONTROL
     calculation      = 'vc-relax'
     prefix           = 'mgh2ni'
-    pseudo_dir       = '/home/x/Workspace/espresso/pseudo'
+    pseudo_dir       = '/home/x/Workspace/3-hEspesso/pseudo'
     outdir           = './outdir/'
     restart_mode     = 'from_scratch'
     tprnfor          = .true.
@@ -101,7 +101,7 @@ ATOMIC_POSITIONS angstrom
   H       8.1483072000      5.4020928000      1.5102500000
   H       5.4020928000      8.1483072000      1.5102500000
   Mg      4.5168000000      4.5168000000      3.0205000000
-  Ni      6.7752000000      6.7752000000      4.5307500000
+  Mg      6.7752000000      6.7752000000      4.5307500000
   H       5.8899072000      5.8899072000      3.0205000000
   H       3.1436928000      3.1436928000      3.0205000000
   H       8.1483072000      5.4020928000      4.5307500000

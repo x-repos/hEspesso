@@ -1,7 +1,7 @@
 &CONTROL
     calculation      = 'relax'
     prefix           = 'h2'
-    pseudo_dir       = '/home/x/Workspace/espresso/pseudo'
+    pseudo_dir       = '/home/x/Workspace/3-hEspesso/pseudo'
     outdir           = './outdir/'
     restart_mode     = 'from_scratch'
     tprnfor          = .true.

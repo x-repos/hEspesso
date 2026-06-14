@@ -16,7 +16,7 @@ More material systems will be added over time.
 
 | Directory | Question |
 |-----------|----------|
-| [`mg-nico/`](mg-nico/README.md) | Do Ni and Co substitutional dopants in MgH₂ lower ΔH per H₂? Baseline + 12.5% TM dopant at fixed 2×2×2 supercell topology. |
+| [`mg-nico/`](mg-nico/README.md) | Do single Ni and Co dopants destabilise the hydrides of **both** Mg and Mg₂Ni? Pure + 6.25% TM (1 atom) across two hosts, six pathways, per-cell spin ground state. |
 | [`mg2ni-nb2o5fe/`](mg2ni-nb2o5fe/README.md) | Do Nb (from Nb₂O₅) and Fe additives destabilise Mg₂NiH₄? Pristine vs. Nb-doped vs. Nb,Fe co-doped. |
 | [`pseudo/`](pseudo/) | Shared UPF pseudopotential library used by all studies. |
 

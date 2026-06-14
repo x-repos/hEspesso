@@ -21,13 +21,17 @@ FIGDIR.mkdir(exist_ok=True)
 
 # species -> (descriptive title, rotation for camera)
 JOBS = [
-    ("mg",     "Mg HCP",                        "-72x,-12y,0z"),
-    ("h2",     "H$_2$ molecule",                "0x,0y,0z"),
-    ("mgh2",   "Rutile MgH$_2$",                "-75x,-10y,0z"),
-    ("mgni",   "Mg$_{14}$Ni$_2$ (Ni 12.5%)",    "-72x,-12y,0z"),
-    ("mgco",   "Mg$_{14}$Co$_2$ (Co 12.5%)",    "-72x,-12y,0z"),
-    ("mgh2ni", "Mg$_{14}$Ni$_2$H$_{32}$ (Ni 12.5%)", "-75x,-10y,0z"),
-    ("mgh2co", "Mg$_{14}$Co$_2$H$_{32}$ (Co 12.5%)", "-75x,-10y,0z"),
+    ("mg",       "Mg HCP",                            "-72x,-12y,0z"),
+    ("h2",       "H$_2$ molecule",                    "0x,0y,0z"),
+    ("mgh2",     "Rutile MgH$_2$",                    "-75x,-10y,0z"),
+    ("mgni",     "Mg$_{15}$Ni (Ni 6.25%)",            "-72x,-12y,0z"),
+    ("mgco",     "Mg$_{15}$Co (Co 6.25%)",            "-72x,-12y,0z"),
+    ("mgh2ni",   "Mg$_{15}$NiH$_{32}$",               "-75x,-10y,0z"),
+    ("mgh2co",   "Mg$_{15}$CoH$_{32}$",               "-75x,-10y,0z"),
+    ("mg2ni",    "Mg$_2$Ni",                          "-72x,-12y,0z"),
+    ("mg2nih4",  "Mg$_2$NiH$_4$",                     "-78x,-8y,0z"),
+    ("mg2nih4_co", "Mg$_2$NiH$_4$ : Co (Mg site)",    "-78x,-8y,0z"),
+    ("mg2nih4_co_nisite", "Mg$_2$NiH$_4$ : Co (Ni site)", "-78x,-8y,0z"),
 ]
 
 # Element colours (CPK-ish, with Ni/Co distinct)
@@ -124,7 +128,14 @@ def main():
     for name, title, rot in JOBS:
         render(name, title, rot)
     render_legend()
-    render_combined()
+    # Mg host: pristine and 1-dopant hydrides (Fig. 1 of the report)
+    render_combined(out_name="mg_host.png",
+                    panels=("mgh2", "mgh2ni", "mgh2co"),
+                    width_ratios=(0.55, 1.0, 1.0))
+    # Mg2Ni host: pristine and Co-doped hydrides (Fig. 2 of the report)
+    render_combined(out_name="mg2ni_host.png",
+                    panels=("mg2nih4", "mg2nih4_co", "mg2nih4_co_nisite"),
+                    width_ratios=(1.0, 1.0, 1.0))
 
 
 if __name__ == "__main__":

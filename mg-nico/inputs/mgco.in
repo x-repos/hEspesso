@@ -1,7 +1,7 @@
 &CONTROL
     calculation      = 'vc-relax'
     prefix           = 'mgco'
-    pseudo_dir       = '/home/x/Workspace/espresso/pseudo'
+    pseudo_dir       = '/home/x/Workspace/3-hEspesso/pseudo'
     outdir           = './outdir/'
     restart_mode     = 'from_scratch'
     tprnfor          = .true.
@@ -21,7 +21,8 @@
     occupations      = 'smearing'
     smearing         = 'cold'
     degauss          = 0.01
-    
+    nspin            = 2
+    starting_magnetization(1) = 0.4
     nosym            = .true.
     noinv            = .true.
     vdw_corr         = 'DFT-D3'
@@ -68,7 +69,7 @@ ATOMIC_POSITIONS angstrom
   Mg      3.2000000000      1.8475208614      1.3025000000
   Mg      4.8000000000      0.9237604307      3.9075000000
   Mg      3.2000000000      1.8475208614      6.5125000000
-  Co      4.8000000000      0.9237604307      9.1175000000
+  Mg      4.8000000000      0.9237604307      9.1175000000
   Mg      1.6000000000      4.6188021535      1.3025000000
   Mg      3.2000000000      3.6950417228      3.9075000000
   Mg      1.6000000000      4.6188021535      6.5125000000

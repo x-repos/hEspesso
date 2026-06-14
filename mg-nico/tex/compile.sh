@@ -1,9 +1,9 @@
 #!/bin/bash
-# Compile results.tex to PDF (two passes for cross-refs) and clean aux files.
+# Compile report.tex to PDF (two passes for cross-refs) and clean aux files.
 set -e
 cd "$(dirname "$0")"
 
-TEX=${1:-results.tex}
+TEX=${1:-report.tex}
 BASE=${TEX%.tex}
 
 pdflatex -interaction=nonstopmode -halt-on-error "$TEX" > /dev/null

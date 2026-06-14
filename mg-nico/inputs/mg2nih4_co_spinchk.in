@@ -1,0 +1,96 @@
+&CONTROL
+    calculation      = 'scf'
+    prefix           = 'mg2nih4_co_spinchk'
+    pseudo_dir       = '/home/x/Workspace/3-hEspesso/pseudo'
+    outdir           = './outdir/'
+    restart_mode     = 'from_scratch'
+    tprnfor          = .true.
+    tstress          = .true.
+    etot_conv_thr    = 1.0d-5
+    forc_conv_thr    = 1.0d-4
+    nstep            = 200
+    max_seconds      = 21600
+/
+
+&SYSTEM
+    ibrav            = 0
+    nat              = 28
+    ntyp             = 4
+    ecutwfc          = 60.0
+    ecutrho          = 480.0
+    occupations      = 'smearing'
+    smearing         = 'cold'
+    degauss          = 0.01
+    nspin            = 2
+    starting_magnetization(1) = 0.4
+    starting_magnetization(3) = 0.4
+    
+    nosym            = .true.
+    noinv            = .true.
+    vdw_corr         = 'DFT-D3'
+    dftd3_version    = 4
+/
+
+&ELECTRONS
+    electron_maxstep = 200
+    conv_thr         = 1.0d-9
+    mixing_beta      = 0.3
+    mixing_mode      = 'plain'
+    mixing_ndim      = 12
+    diagonalization  = 'david'
+    diago_david_ndim = 4
+/
+
+&IONS
+    ion_dynamics = 'bfgs'
+    trust_radius_max = 0.2
+/
+
+&CELL
+    cell_dynamics = 'bfgs'
+    press_conv_thr = 0.5
+/
+
+ATOMIC_SPECIES
+  Co  58.9332   Co_pbe_v1.2.uspp.F.UPF
+  Mg  24.305    Mg.pbe-n-kjpaw_psl.0.3.0.UPF
+  Ni  58.6934   ni_pbe_v1.4.uspp.F.UPF
+  H    1.00794  H.pbe-rrkjus_psl.1.0.0.UPF
+
+CELL_PARAMETERS angstrom
+   7.530116331   0.006974321  -0.109542129
+  -5.029863589   5.780991346   0.192659095
+  -2.328714335   1.157035575   5.664192696
+
+ATOMIC_POSITIONS angstrom
+Co              -4.2263736615        5.3253208963        5.5268930653
+Mg              -3.0239793974        4.8926367734        2.7701326920
+Mg               3.2103158540        2.0403955698        2.9328536625
+Mg               4.4467301320        1.5649964773        0.0868368977
+Mg               0.7873129438        6.5744555720        4.3932598569
+Mg              -0.5786077742        0.3267103353        1.4263954731
+Mg              -0.5928283861        3.7872738223        4.2641481123
+Mg               0.5865292793        3.1994473232        1.4020198860
+Ni              -1.7752386025        6.1312231274        5.1610604467
+Ni              -1.8224891011        2.5156961067        2.2977495286
+Ni               2.0190828050        4.3599827200        3.4204159733
+Ni               1.9167206034        0.8488800063        0.5966600906
+H               -0.5200002456        5.3450194889        5.6284154156
+H               -0.3932810401        2.1146716768        2.7645424378
+H                0.5903017594        4.8127801573        2.9942295671
+H                0.5988602504        1.4906759518        0.1466669782
+H                5.0461434331        1.1316184990        2.0408056220
+H                3.8073153742        1.7921308127        4.9462921561
+H               -3.2038151865        5.0268920632        0.4890438288
+H               -4.9105645135        5.7599967526        4.0787356969
+H               -3.1746845880        6.2127840371        4.4493190869
+H               -2.5736549454        3.3420512624        1.1271432645
+H                3.1995257064        3.9665321054        4.4976178788
+H                2.9851864724        0.6439638918        1.6661011457
+H                0.4361203645        2.3428712213        4.9788296598
+H                2.5953989914        3.7872558297        2.1078125356
+H               -2.4382615644        3.1455932277        3.5692303648
+H               -0.5902272719        4.7481616684        0.6991239434
+
+K_POINTS automatic
+  8 8 6 0 0 0
