@@ -10,13 +10,14 @@ emits them only once the bulk vc-relax is done -- re-run after the bulk.
 """
 from pathlib import Path
 import math
+import os
 import numpy as np
 from ase import Atoms
 from ase.io import read
 from ase.build import molecule
 
 HERE = Path(__file__).resolve().parent
-PSEUDO_DIR = "/home/x/Workspace/3-hEspesso/pseudo"
+PSEUDO_DIR = os.environ.get("PSEUDO_DIR", "/home/x/Workspace/3-hEspesso/pseudo")
 INPUTS = HERE / "inputs"
 for _d in ("inputs", "outputs", "logs", "outdir"):
     (HERE / _d).mkdir(exist_ok=True)
@@ -66,7 +67,7 @@ def write_qe(path, atoms, *, calc, prefix, kpts, nspin=1, magn=None,
          "    restart_mode     = 'from_scratch'",
          "    tprnfor          = .true.",
          f"    tstress          = .{'false' if dipole else 'true'}.",
-         "    etot_conv_thr    = 1.0d-5", "    forc_conv_thr    = 1.0d-4",
+         "    etot_conv_thr    = 1.0d-5", "    forc_conv_thr    = 1.0d-3",
          "    nstep            = 200", "    max_seconds      = 36000", "/"]
     L += ["&SYSTEM", "    ibrav            = 0", f"    nat              = {nat}",
           f"    ntyp             = {ntyp}", "    ecutwfc          = 60.0",
@@ -91,7 +92,10 @@ def write_qe(path, atoms, *, calc, prefix, kpts, nspin=1, magn=None,
           "    mixing_beta      = 0.2", "    mixing_mode      = 'local-TF'",
           "    diagonalization  = 'david'", "/"]
     if calc in ("relax", "vc-relax"):
-        L += ["&IONS", "    ion_dynamics     = 'bfgs'", "/"]
+        # cap the BFGS step: a loosely-bound molecule otherwise floats and the
+        # optimizer oscillates ~1e-2 forever instead of settling.
+        L += ["&IONS", "    ion_dynamics     = 'bfgs'",
+              "    trust_radius_max = 0.2", "/"]
     if calc == "vc-relax":
         L += ["&CELL", "    cell_dynamics    = 'bfgs'", "    press_conv_thr   = 0.5", "/"]
     L += ["ATOMIC_SPECIES"]

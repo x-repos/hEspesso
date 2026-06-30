@@ -7,7 +7,7 @@
     tprnfor          = .true.
     tstress          = .true.
     etot_conv_thr    = 1.0d-5
-    forc_conv_thr    = 1.0d-4
+    forc_conv_thr    = 1.0d-3
     nstep            = 200
     max_seconds      = 36000
 /
@@ -35,6 +35,7 @@
 /
 &IONS
     ion_dynamics     = 'bfgs'
+    trust_radius_max = 0.2
 /
 ATOMIC_SPECIES
   N     14.0070  N.pbe-n-radius_5.UPF
