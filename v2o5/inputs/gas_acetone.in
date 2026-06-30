@@ -1,0 +1,60 @@
+&CONTROL
+    calculation      = 'relax'
+    prefix           = 'gas_acetone'
+    pseudo_dir       = '/home/x/Workspace/3-hEspesso/pseudo'
+    outdir           = './outdir/'
+    restart_mode     = 'from_scratch'
+    tprnfor          = .true.
+    tstress          = .true.
+    etot_conv_thr    = 1.0d-5
+    forc_conv_thr    = 1.0d-4
+    nstep            = 200
+    max_seconds      = 36000
+/
+&SYSTEM
+    ibrav            = 0
+    nat              = 10
+    ntyp             = 3
+    ecutwfc          = 60.0
+    ecutrho          = 600.0
+    occupations      = 'smearing'
+    smearing         = 'cold'
+    degauss          = 0.01
+    nspin            = 1
+    vdw_corr         = 'DFT-D3'
+    dftd3_version    = 4
+/
+&ELECTRONS
+    electron_maxstep = 250
+    conv_thr         = 1.0d-9
+    mixing_beta      = 0.2
+    mixing_mode      = 'local-TF'
+    diagonalization  = 'david'
+/
+&IONS
+    ion_dynamics     = 'bfgs'
+/
+ATOMIC_SPECIES
+  O     15.9990  O.pbe-n-kjpaw_psl.0.1.UPF
+  C     12.0110  C.pbe-n-kjpaw_psl.1.0.0.UPF
+  H      1.0080  H.pbe-rrkjus_psl.1.0.0.UPF
+
+CELL_PARAMETERS angstrom
+     15.0000000000     0.0000000000     0.0000000000
+      0.0000000000    15.0000000000     0.0000000000
+      0.0000000000     0.0000000000    15.0000000000
+
+ATOMIC_POSITIONS angstrom
+  O      7.5000000000     7.5000000000     8.8348020000
+  C      7.5000000000     7.5000000000     7.6082710000
+  C      7.5000000000     8.7854900000     6.8128690000
+  C      7.5000000000     6.2145100000     6.8128690000
+  H      7.5000000000     9.6349170000     7.4957460000
+  H      7.5000000000     5.3650830000     7.4957460000
+  H      6.6189140000     8.8315480000     6.1651980000
+  H      8.3810860000     8.8315480000     6.1651980000
+  H      8.3810860000     6.1684520000     6.1651980000
+  H      6.6189140000     6.1684520000     6.1651980000
+
+K_POINTS automatic
+  1 1 1 0 0 0

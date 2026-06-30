@@ -1,0 +1,67 @@
+&CONTROL
+    calculation      = 'vc-relax'
+    prefix           = 'bulk'
+    pseudo_dir       = '/home/x/Workspace/3-hEspesso/pseudo'
+    outdir           = './outdir/'
+    restart_mode     = 'from_scratch'
+    tprnfor          = .true.
+    tstress          = .true.
+    etot_conv_thr    = 1.0d-5
+    forc_conv_thr    = 1.0d-4
+    nstep            = 200
+    max_seconds      = 36000
+/
+&SYSTEM
+    ibrav            = 0
+    nat              = 14
+    ntyp             = 2
+    ecutwfc          = 60.0
+    ecutrho          = 600.0
+    occupations      = 'smearing'
+    smearing         = 'cold'
+    degauss          = 0.01
+    nspin            = 1
+    vdw_corr         = 'DFT-D3'
+    dftd3_version    = 4
+/
+&ELECTRONS
+    electron_maxstep = 250
+    conv_thr         = 1.0d-9
+    mixing_beta      = 0.2
+    mixing_mode      = 'local-TF'
+    diagonalization  = 'david'
+/
+&IONS
+    ion_dynamics     = 'bfgs'
+/
+&CELL
+    cell_dynamics    = 'bfgs'
+    press_conv_thr   = 0.5
+/
+ATOMIC_SPECIES
+  V     50.9415  v_pbe_v1.4.uspp.F.UPF
+  O     15.9990  O.pbe-n-kjpaw_psl.0.1.UPF
+
+CELL_PARAMETERS angstrom
+     11.5715781600     0.0000000000     0.0000000000
+      0.0000000000     3.6261974700     0.0000000000
+      0.0000000000     0.0000000000     4.6950121200
+
+ATOMIC_POSITIONS angstrom
+  V      7.5128498976     0.0000000000     2.8616164602
+  V      9.8445173424     1.8130987350     1.8333956598
+  V      1.7270608176     1.8130987350     1.8333956598
+  V      4.0587282624     0.0000000000     2.8616164602
+  O      7.8873656447     1.8130987350     2.3852402011
+  O      9.4700015953     0.0000000000     2.3097719189
+  O      2.1015765647     0.0000000000     2.3097719189
+  O      3.6842125153     1.8130987350     2.3852402011
+  O      4.1131526346     0.0000000000     4.4682724254
+  O      1.6726364454     1.8130987350     0.2267396946
+  O      9.8989417146     1.8130987350     0.2267396946
+  O      0.0000000000     1.8130987350     2.3599611760
+  O      5.7857890800     0.0000000000     2.3350509440
+  O      7.4584255254     0.0000000000     4.4682724254
+
+K_POINTS automatic
+  2 8 6 0 0 0

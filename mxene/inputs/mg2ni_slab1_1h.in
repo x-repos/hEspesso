@@ -1,0 +1,76 @@
+&CONTROL
+    calculation      = 'relax'
+    prefix           = 'mg2ni_slab1_1h'
+    pseudo_dir       = '/home/x/Workspace/3-hEspesso/pseudo'
+    outdir           = './outdir/'
+    restart_mode     = 'from_scratch'
+    tprnfor          = .true.
+    etot_conv_thr    = 1.0d-5
+    forc_conv_thr    = 1.0d-4
+    nstep            = 200
+    max_seconds      = 43200
+/
+
+&SYSTEM
+    ibrav            = 0
+    nat              = 19
+    ntyp             = 3
+    ecutwfc          = 60.0
+    ecutrho          = 600.0
+    occupations      = 'smearing'
+    smearing         = 'cold'
+    degauss          = 0.02
+    nspin            = 2
+    starting_magnetization(1) = 0.0
+    starting_magnetization(2) = 0.3
+    starting_magnetization(3) = 0.0
+    vdw_corr         = 'DFT-D3'
+    dftd3_version    = 4
+/
+
+&ELECTRONS
+    electron_maxstep = 250
+    conv_thr         = 1.0d-7
+    mixing_beta      = 0.2
+    mixing_mode      = 'local-TF'
+    mixing_ndim      = 12
+    diago_david_ndim = 4
+/
+
+&IONS
+    ion_dynamics     = 'bfgs'
+/
+
+ATOMIC_SPECIES
+  Mg    24.3050  Mg.pbe-n-kjpaw_psl.0.3.0.UPF
+  Ni    58.6934  ni_pbe_v1.4.uspp.F.UPF
+  H      1.0079  H.pbe-rrkjus_psl.1.0.0.UPF
+
+CELL_PARAMETERS angstrom
+      5.1280271924     0.0000000000     0.0000000000
+     -2.5640135962     4.4409997493     0.0000000000
+      0.0000000000    -0.0000000000    32.3255655250
+
+ATOMIC_POSITIONS angstrom
+  Mg    -1.2927539998     3.6937358748    20.8238211569
+  Mg     0.0008516357     1.4620936479    16.4994309229
+  Mg     3.8567674817     0.7472657470    20.8238211569
+  Mg     2.5631618461     2.9789079739    16.4994309229
+  Mg     1.2940060262     3.7077624754    12.1663873814  0 0 0
+  Mg     1.2700074556     0.7332391464    12.1663873814  0 0 0
+  Mg     1.2820067409     2.2205008109    19.3205292123
+  Mg     2.5640134818     0.0000000000    17.9903822653
+  Mg     1.2820067409     2.2205008109    22.2386554759
+  Mg     2.5640134818     0.0000000000    15.0055367316  0 0 0
+  Mg     3.8460202227     2.2205008109    13.6600127941  0 0 0
+  Mg     3.8460202227     2.2205008109    10.6727619688  0 0 0
+  Ni     1.2820067409     2.2205008109    14.3327747627  0 0 0
+  Ni     2.5640134818     0.0000000000    10.0000000000  0 0 0
+  Ni     3.8460202227     2.2205008109    18.6423784164
+  Ni     0.0000000000     0.0000000000    14.3327747627  0 0 0
+  Ni     0.0000000000     0.0000000000    10.0000000000  0 0 0
+  Ni     0.0000000000     0.0000000000    18.6629863505
+  H     -0.4273356566     2.2205008109    23.2386554759
+
+K_POINTS automatic
+  6 6 1   0 0 0

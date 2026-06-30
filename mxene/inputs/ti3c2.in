@@ -1,0 +1,63 @@
+&CONTROL
+    calculation      = 'vc-relax'
+    prefix           = 'ti3c2'
+    pseudo_dir       = '/home/x/Workspace/3-hEspesso/pseudo'
+    outdir           = './outdir/'
+    restart_mode     = 'from_scratch'
+    tprnfor          = .true.
+    tstress          = .true.
+    etot_conv_thr    = 1.0d-5
+    forc_conv_thr    = 1.0d-4
+    nstep            = 200
+    max_seconds      = 18000
+/
+
+&SYSTEM
+    ibrav            = 4
+    A                = 3.104
+    C                = 24.641
+    nat              = 5
+    ntyp             = 2
+    ecutwfc          = 60.0
+    ecutrho          = 600.0
+    occupations      = 'smearing'
+    smearing         = 'cold'
+    degauss          = 0.02
+    nspin            = 2
+    starting_magnetization(1) = 0.4
+    starting_magnetization(2) = 0.0
+    vdw_corr         = 'DFT-D3'
+    dftd3_version    = 4
+/
+
+&ELECTRONS
+    electron_maxstep = 200
+    conv_thr         = 1.0d-8
+    mixing_beta      = 0.3
+    mixing_mode      = 'local-TF'
+    diagonalization  = 'david'
+/
+
+&IONS
+    ion_dynamics     = 'bfgs'
+/
+
+&CELL
+    cell_dynamics    = 'bfgs'
+    cell_dofree      = '2Dxy'
+    press_conv_thr   = 0.5
+/
+
+ATOMIC_SPECIES
+  Ti  47.867   ti_pbe_v1.4.uspp.F.UPF
+  C   12.011   C.pbe-n-kjpaw_psl.1.0.0.UPF
+
+ATOMIC_POSITIONS crystal
+  Ti   0.000000   0.000000   0.500000
+  Ti   0.333333   0.666667   0.594192
+  Ti   0.666667   0.333333   0.405808
+  C    0.666667   0.333333   0.541556
+  C    0.333333   0.666667   0.458444
+
+K_POINTS automatic
+  12 12 1   0 0 0

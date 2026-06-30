@@ -1,0 +1,8 @@
+&PROJWFC
+  prefix='mg2ni_slab1_1h'
+  outdir='./outdir/'
+  DeltaE=0.05
+  ngauss=1
+  degauss=0.02
+  filpdos='pdos/mg2ni_slab1_1h'
+/

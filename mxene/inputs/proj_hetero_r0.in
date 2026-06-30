@@ -1,0 +1,8 @@
+&PROJWFC
+  prefix='hetero_r0'
+  outdir='./outdir/'
+  DeltaE=0.05
+  ngauss=1
+  degauss=0.02
+  filpdos='pdos/hetero_r0'
+/
